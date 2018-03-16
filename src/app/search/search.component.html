@@ -1,0 +1,28 @@
+ <div class="group-highlight search-group ">
+  <div class="form-group">
+    <label for="searchbyupc">Search By UPC</label>
+    <input type="text" [(ngModel)]="productUPC" class="form-control" id="searchbyupc" placeholder="UPC">
+  </div>
+  <div class="form-group">
+    <label>(OR)</label>
+  </div>
+  <div class="form-group">
+    <label for="searchbydesc">Search By description</label>
+    <input type="text" [(ngModel)]="productDescription"  class="form-control" id="searchbydesc">
+  </div>
+  <div class="form-group">
+    <label for="searchbytype">Search By Type</label>
+    <p-autoComplete [(ngModel)]="productTypeSelected" [suggestions]="productTypeSearchGrp" (completeMethod)="typeSearch($event)" field="productTypeName" emptyMessage="No Results" [multiple]="true"></p-autoComplete>
+  </div>
+  <div class="form-group">
+    <label for="searchbycategory">Search By Category</label>
+    <p-autoComplete [(ngModel)]="productCategorySelected" [suggestions]="productCategorySearchGrp" (completeMethod)="categorySearch($event)" field="categoryName" emptyMessage="No Results" [multiple]="true"></p-autoComplete>
+  </div>
+  <div class="form-group">
+    <label for="searchbysubcategory">Search By Sub-Category</label>
+    <p-autoComplete [(ngModel)]="productSubcategorySelected" [suggestions]="productSubcategorySearchGrp" (completeMethod)="subcategorySearch($event)" field="subcategoryName" emptyMessage="No Results" [multiple]="true"></p-autoComplete>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-primary" (click)="searchClickhandler($event)">Search</button>
+  </div>
+</div>

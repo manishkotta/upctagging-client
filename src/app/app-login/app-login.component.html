@@ -1,0 +1,35 @@
+<div class="container" style="margin-top:25px">
+  <div class="row h-100 justify-content-center align-items-center">
+    <div class="col-sm-4">
+    <div class="card card-container" style="padding:40px 40px">
+      <h4 class="text-center">Login</h4>
+      <p id="profile-name" class="profile-name-card"></p>
+      <form name="form" (ngSubmit)="f.form.valid && onSubmit()" class="form-signin" #f="ngForm">
+        <span id="reauth-email" class="reauth-email"></span>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+          <label for="inputEmail">Email</label>
+          <input type="email" id="inputEmail" [(ngModel)]="login.Email" name="email" class="form-control" placeholder="Email address" #username="ngModel" required autofocus>
+          <div *ngIf="f.submitted && !username.valid" class="error">Username is required</div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+          <label for="inputpassword">Password</label>
+          <input type="password" id="inputPassword" name="password" [(ngModel)]="login.Password" #password="ngModel" class="form-control" placeholder="Password" required>
+          <div *ngIf="f.submitted && !password.valid" class="error">Password is required</div>
+        </div>
+        <div id="remember" class="checkbox">
+          <label>
+            <input type="checkbox" value="show-password"> Show Password
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+      </form>
+      <!-- /form -->
+      <!-- <a href="#" class="forgot-password">
+        Forgot the password?
+      </a> -->
+    </div>
+    <!-- /card-container -->
+    </div>
+  </div>
+</div>
+<!-- /container -->

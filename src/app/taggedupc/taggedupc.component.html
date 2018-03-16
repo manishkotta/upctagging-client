@@ -1,0 +1,46 @@
+
+
+<p-table [value]="TaggedUPCGroup" [scrollable]="true" [rows]="100" scrollHeight="500px" [paginator]="true" (onLazyLoad)="loadTaggedUPCOnScroll($event)" [lazy]="true" [totalRecords]="totalRecords">
+  <ng-template pTemplate="header">
+    <tr>
+      <th *ngFor="let col of TaggedUPCColumns" [pSortableColumn]="col.field">
+        {{col.header}}
+        <p-sortIcon [field]="col.field"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-upc>
+
+    <tr [pSelectableRow]="upc">
+      <td>
+        {{upc.descriptionID}}
+      </td>
+      <td>
+        {{upc.upcCode}}
+      </td>
+      <td>
+        {{upc.description}}
+      </td>
+      <td>
+        <span *ngIf="upc.productType != null"> {{ upc.productType.productTypeName }} </span>
+      </td>
+      <td>
+        <span *ngIf="upc.productCategory != null"> {{ upc.productCategory.categoryName }} </span>
+      </td>
+      <td>
+        <span *ngIf="upc.productSubCategory != null"> {{ upc.productSubCategory.subcategoryName }} </span>
+      </td>
+      <td>
+        {{ upc.productSizing }}
+      </td>
+    </tr>
+
+  </ng-template>
+  <!--<ng-template pTemplate="emptymessage" let-TaggedUPCGroup>
+    <tr>
+      <td [attr.colspan]="TaggedUPCGroup.length">
+        No records found
+      </td>
+    </tr>
+  </ng-template>-->
+</p-table>

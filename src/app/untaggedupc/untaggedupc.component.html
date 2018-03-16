@@ -1,0 +1,146 @@
+
+<p-table [value]="UntaggedUPCGroup" [(selection)]="UntaggedUPCSelectedGrp" [scrollable]="true" [rows]="100" scrollHeight="500px" [paginator]="true" (onLazyLoad)="loadUntaggedUPCOnScroll($event)"
+         [lazy]="true" [totalRecords]="totalRecords">
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 2.25em">
+        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+      </th>
+      <th *ngFor="let col of untaggedUPCColumns" [pSortableColumn]="col.field">
+        {{col.header}}
+        <p-sortIcon [field]="col.field"></p-sortIcon>
+      </th>
+      <th>
+        Edit
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-upc>
+
+    <tr [pSelectableRow]="upc">
+      <td style="width: 2.25em">
+        <p-tableCheckbox [value]="upc"></p-tableCheckbox>
+      </td>
+      <td>
+        {{upc.descriptionID}}
+      </td>
+      <td>
+        {{upc.upcCode}}
+      </td>
+      <td>
+        {{upc.description}}
+      </td>
+      <td>
+        <span *ngIf="upc.productType != null"> {{ upc.productType.productTypeName }} </span>
+      </td>
+      <td>
+        <span *ngIf="upc.productCategory != null"> {{ upc.productCategory.categoryName }} </span>
+      </td>
+      <td>
+        <span *ngIf="upc.productSubCategory != null"> {{ upc.productSubCategory.subcategoryName }} </span>
+      </td>
+      <td>
+        {{ upc.productSizing }}
+      </td>
+      <td>
+        <span *ngIf="upc.itemAssignedTo !=null"> {{ upc.itemAssignedTo.name }} </span>
+      </td>
+      <td>
+        <div (click)="onUntaggedUPCEditBtnHndlr(upc)">
+          <span>
+            <i class="fa fa-edit"></i>
+          </span>
+        </div>
+      </td>
+    </tr>
+
+  </ng-template>
+  <!--<ng-template pTemplate="emptymessage" let-UntaggedUPCGroup>
+    <tr>
+      <td [attr.colspan]="UntaggedUPCGroup.length">
+        No records found
+      </td>
+    </tr>
+  </ng-template>-->
+</p-table>
+
+
+<p-dialog  [(visible)]="displayDialog"  [responsive]="true" showEffect="fade" [modal]="true" [width]="450">
+  <p-header>
+    Untagged UPC Details
+    <a href="javascript:(void)" role="button" class="ui-dialog-titlebar-icon modal-close ui-corner-all ng-star-inserted" (click)="UntaggedUPCCancel($event)">
+      <span class="fa fa-fw fa-close"></span>
+    </a>
+  </p-header>
+  <div class="ui-g ui-fluid" *ngIf="UntaggedUPCSelectedObj">
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="desc-id">Desc ID</label>
+      </div>
+      <div class="ui-g-8">
+        <span> {{UntaggedUPCSelectedObj.descriptionID }} </span>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="upc-code">UPC Code</label>
+      </div>
+      <div class="ui-g-8">
+        <span> {{UntaggedUPCSelectedObj.upcCode }} </span>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="description">Description</label>
+      </div>
+      <div class="ui-g-8">
+        <textarea pInputText id="description" [(ngModel)]="UntaggedUPCSelectedObj.description"></textarea>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="year">Type</label>
+      </div>
+      <div class="ui-g-8">
+        <p-autoComplete [(ngModel)]="UntaggedUPCSelectedObj.productType" [suggestions]="productTypeSearchGrp" (completeMethod)="typeSearch($event)" field="productTypeName" emptyMessage="No Results"></p-autoComplete>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="year">Category</label>
+      </div>
+      <div class="ui-g-8">
+        <p-autoComplete [(ngModel)]="UntaggedUPCSelectedObj.productCategory" [suggestions]="productCategorySearchGrp" (completeMethod)="categorySearch($event)" field="categoryName" emptyMessage="No Results"></p-autoComplete>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="year">Sub-Category</label>
+      </div>
+      <div class="ui-g-8">
+        <p-autoComplete [(ngModel)]="UntaggedUPCSelectedObj.productSubCategory" [suggestions]="productSubcategorySearchGrp" (completeMethod)="subcategorySearch($event)" field="subcategoryName" emptyMessage="No Results"></p-autoComplete>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="year">Sizing</label>
+      </div>
+      <div class="ui-g-8">
+        <input type="text" [(ngModel)]="UntaggedUPCSelectedObj.productSizing" />
+      </div>
+    </div>
+   
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" class="btn btn-primary" (click)="UntaggedUPCCancel()">
+        <i class="fa fa-close"></i>
+        Cancel
+      </button>
+      <button type="button" class="btn btn-primary" (click)="UntaggedUPCSave()" label="Save">
+        <i class="fa fa-check"></i>
+        Save
+      </button>
+    </div>
+  </p-footer>
+</p-dialog>

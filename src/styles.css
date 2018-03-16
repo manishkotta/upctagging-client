@@ -1,0 +1,56 @@
+/* You can add global styles to this file, and also import other style files */
+img{
+    height:100%
+}
+.header__top {
+    height: 89px;
+    background-color: #f1f1f1;
+}
+.header_logo{
+    height:75px;
+    margin-top:10px;
+}
+.group-highlight{
+    height:auto;
+    width:100%;
+    background-color: #f1f1f1;
+    border:1px solid #BDBDBD;
+    margin-bottom:25px;
+}
+.fileupload-div{
+    margin-top:10px;
+    padding:25px 50px;
+}
+.search-group{
+    padding:10px;
+    margin-top:2.5rem;
+}
+.form-control{
+    padding: 0.3rem 0.5rem;
+    font-size:14px;
+}
+label{
+    font-size:14px;
+}
+.container{
+  max-width:1200px;
+}
+.ui-table .ui-table-tbody > tr > td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+.ui-dialog-titlebar-close {
+  display: none;
+}
+.modal-close {
+  float: right;
+  padding: .125em;
+  cursor: pointer;
+  border: 1px solid transparent;
+  font: 15px;
+}
+.ui-autocomplete-input-token input {
+  width: 13em;
+}

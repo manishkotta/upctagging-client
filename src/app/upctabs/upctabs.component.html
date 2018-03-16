@@ -1,0 +1,30 @@
+
+
+<p-growl [(value)]="msgs"></p-growl>
+<p-overlayPanel appendTo="body" #op>
+  <p-autoComplete [(ngModel)]="assignee" [suggestions]="resutls" (completeMethod)="SearchUser($event)" field="name"></p-autoComplete>
+  <button class="btn btn-primary" (click)="AssingeeClickHndlr($event)">Assign</button>
+</p-overlayPanel>
+<div>
+  <div>
+    <div class="row" style="margin-left:0px; margin-right:0px">
+
+      <ul class="nav nav-tabs">
+        <li *ngFor="let l of anchorList;let i = index" class="nav-item">
+          <a class="nav-link" [class.active]="clicked === l" (click)="clicked = l">{{l}}</a>
+        </li>
+      </ul>
+      <div class="assign-to" *ngIf="clicked === anchorList[1]">
+        <button class="btn btn-info" pButton (click)="op.toggle($event)">Assign to User</button>
+      </div>
+      <div class="assign-to" *ngIf="clicked === anchorList[2]">
+        <button class="btn btn-info" pButton (click)="ApproveClickHndlr($event)">Approve</button>
+      </div>
+    </div>
+    <div class="group-highlight table-responsive-sm">
+      <app-taggedupc *ngIf="clicked === anchorList[0]"></app-taggedupc>
+      <app-untaggedupc *ngIf="clicked === anchorList[1]"></app-untaggedupc>
+      <app-savedupc *ngIf="clicked === anchorList[2]"></app-savedupc>
+    </div>
+  </div>
+</div>

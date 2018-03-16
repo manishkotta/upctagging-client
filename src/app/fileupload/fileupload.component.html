@@ -1,0 +1,17 @@
+  <div class="row no-gutters">
+    <div class="group-highlight fileupload-div">
+      <div>
+        <div class="col-sm-12 row">
+          <h5>Please Choose a file to Upload</h5>
+        </div>
+        <form [formGroup]="fileUploadForm" (ngSubmit)="onSubmit()">
+          <div class="col-sm-12 row">
+            <button type="button" class="btn btn-primary btn-block col-sm-4" (click)="handleChooseFileBtnClick($event)">Choose File</button>
+            <input type="file" id="inputFile" formControlName="uploadFile" (change)="handleFileInput($event.target.files)" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                   style="display:none">
+            <label id="file-name" class="col-sm-4 file-name">No file chosen</label>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
