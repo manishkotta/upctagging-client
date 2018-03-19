@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TableModule } from 'primeng/table';
 import { AutoCompleteModule } from 'primeng/autocomplete';
@@ -32,6 +32,9 @@ import { CommonService } from './upc.tagging.services/common.service';
 import { DataTransferService } from './upc.tagging.services/data.transfer.service';
 import { TaggedUpcService } from './upc.tagging.services/tagged-upc.service';
 import { AuthenticationService } from './upc.tagging.services/authentication.service';
+import { CookieService } from 'ngx-cookie-service';
+
+import { UpctaggingHttpInterceptor } from './upctagging.http.interceptor';
 
 @NgModule({
   declarations: [
@@ -61,7 +64,11 @@ import { AuthenticationService } from './upc.tagging.services/authentication.ser
     OverlayPanelModule,
     GrowlModule
   ],
-  providers: [FileuploadService, UntaggedUpcService, CommonService, DataTransferService, TaggedUpcService, AuthenticationService],
+  providers: [FileuploadService, UntaggedUpcService, CommonService, DataTransferService, TaggedUpcService, AuthenticationService, CookieService,{
+    provide: HTTP_INTERCEPTORS,
+    useClass: UpctaggingHttpInterceptor,
+      multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

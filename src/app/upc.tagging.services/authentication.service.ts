@@ -11,9 +11,9 @@ export class AuthenticationService {
 
   AuthenticateUserCreds(login: Login): Observable<any> {
     console.count("Authentication Service");
-    let header = new HttpHeaders();
-    header.append('withCredentials', 'true');
-    return this.http.post<any>("http://localhost:51684/api/login/authenticate-user", { "Email": login.Email, "Password": login.Password }, { headers : header });  
+    //const header = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+
+    return this.http.post<any>("http://localhost:51684/api/login/authenticate-user", { "Email": login.Email, "Password": login.Password }, { withCredentials: true, observe: 'response' });  
   }
 
 }

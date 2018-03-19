@@ -3,6 +3,7 @@ import { User } from '../modals/user';
 import { CommonService } from '../upc.tagging.services/common.service';
 import { Message } from 'primeng/components/common/api';
 import { DataTransferService } from '../upc.tagging.services/data.transfer.service';
+import { CookieService } from 'ngx-cookie-service';
  
 @Component({
   selector: 'app-upctabs',
@@ -16,17 +17,12 @@ export class UpctabsComponent implements OnInit {
   userGrp: User[];
   assignee: User;
   resutls: User[];
-  msgs: Message[] =[];
+  msgs: Message[] = [];
+  userRole: string;
 
-  constructor(private _commonService: CommonService, private _dataTransferService: DataTransferService) {
-    this.anchorList = [
-      "Tagged UPCs",
-      "Untagged UPCs",
-      "Saved UPCs"
-    ];
-
-    this.clicked = this.anchorList[1];
-
+  constructor(private _commonService: CommonService, private _dataTransferService: DataTransferService, private cookieService: CookieService) {
+    this.anchorList = [];
+    this.userRole = this.cookieService.get('userRole');
   }
 
   ngOnInit() {
@@ -37,6 +33,21 @@ export class UpctabsComponent implements OnInit {
       err => {
         console.log(err);
       });
+
+    if (this.userRole == "Admin") {
+      this.anchorList = [
+        "Tagged UPCs",
+        "Untagged UPCs",
+        "Saved UPCs"
+      ];
+    } else {
+      this.anchorList = [
+        "Tagged UPCs",
+        "Untagged UPCs"
+      ];
+
+    }
+    this.clicked = this.anchorList[1];
   }
 
   SearchUser(event: any) {

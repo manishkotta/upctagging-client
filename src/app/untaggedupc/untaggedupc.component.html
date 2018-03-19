@@ -3,7 +3,7 @@
          [lazy]="true" [totalRecords]="totalRecords">
   <ng-template pTemplate="header">
     <tr>
-      <th style="width: 2.25em">
+      <th style="width: 2.25em" *ngIf="userRoles == 'Admin'">
         <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
       </th>
       <th *ngFor="let col of untaggedUPCColumns" [pSortableColumn]="col.field">
@@ -18,7 +18,7 @@
   <ng-template pTemplate="body" let-upc>
 
     <tr [pSelectableRow]="upc">
-      <td style="width: 2.25em">
+      <td style="width: 2.25em" *ngIf="userRoles == 'Admin'">
         <p-tableCheckbox [value]="upc"></p-tableCheckbox>
       </td>
       <td>

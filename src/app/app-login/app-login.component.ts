@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Login } from '../modals/login';
 import { AuthenticationService } from '../upc.tagging.services/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class AppLoginComponent implements OnInit {
   returnUrl: string;
 
   constructor(private _authenticationService: AuthenticationService,private route: ActivatedRoute,
-    private router: Router,) {
+    private router: Router,
+    private cookieService: CookieService) {
     this.submitted = false;
     this.login = new Login();
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard'; 
@@ -30,11 +32,12 @@ export class AppLoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    this._authenticationService.AuthenticateUserCreds(this.login).subscribe(res => {
-      console.log(res.headers.get('.AspNetCore.Cookies'));
-      if (res.ok == true) {
-        console.log(res.headers.get('Set-Cookie'));
-        this.router.navigateByUrl(this.returnUrl);
+    this._authenticationService.AuthenticateUserCreds(this.login)
+      .subscribe(res => {
+        if (res.ok == true) {
+          localStorage.setItem('auth_token', res.body.authToken);
+          this.cookieService.set('userRole', res.body.roleName);
+          this.router.navigateByUrl(this.returnUrl);
       }
     }, err => {
       console.log(err);

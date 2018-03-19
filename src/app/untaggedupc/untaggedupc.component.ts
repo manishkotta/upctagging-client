@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy,Input } from '@angular/core';
 import { UPCFilter } from '../modals/upc.filter';
 import { TableModule } from 'primeng/table';
 import { UntaggedUpcService } from '../upc.tagging.services/untagged-upc.service';
@@ -9,6 +9,7 @@ import { ProductCategory } from '../modals/product.category';
 import { ProductSubcategory } from '../modals/product.subcategory';
 import { CommonService } from '../upc.tagging.services/common.service';
 import { DialogModule } from 'primeng/dialog';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -40,11 +41,15 @@ export class UntaggedupcComponent implements OnInit, OnDestroy {
 
   isPostBack: boolean;
 
+  userRoles: string;
+
   constructor(private _unntaggedUpcService: UntaggedUpcService,
     private _dataTransferService: DataTransferService,
-    private _commonService: CommonService) {
+    private _commonService: CommonService,
+    private _cookieService: CookieService) {
 
     this.isPostBack = false;
+    this.userRoles = this._cookieService.get('userRole');
 
     this.untaggedUPCColumns = [
       { field: 'descriptionID', header: 'Desc ID' },

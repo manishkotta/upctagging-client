@@ -10,22 +10,39 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class CommonService {
 
+
+  productTypeGrp: Observable<ProductType[]>;
+  productCategoryGrp: Observable<ProductCategory[]>;
+  productSubcategoryGrp: Observable<ProductSubcategory[]>;
+
   constructor(private http: HttpClient) { }
 
   GetProductType(): Observable<ProductType[]>
-  {
-    console.count("Common");
-    return this.http.get<ProductType[]>('http://localhost:51684/api/dashboard/product-type');
-    
+  {  
+    if (this.productTypeGrp === undefined) {
+      this.productTypeGrp = this.http.get<ProductType[]>('http://localhost:51684/api/dashboard/product-type').publishReplay(1).refCount();
+      return this.productTypeGrp;
+    }
+    else
+      return this.productTypeGrp;
   }
 
   GetProductCategory(): Observable<ProductCategory[]> {
-    console.count("PC");
-    return this.http.get<ProductCategory[]>('http://localhost:51684/api/dashboard/product-category');
+    if (this.productCategoryGrp === undefined) {
+      this.productCategoryGrp = this.http.get<ProductCategory[]>('http://localhost:51684/api/dashboard/product-category').publishReplay(1).refCount();
+      return this.productCategoryGrp;
+    }
+    else 
+      return this.productCategoryGrp;
   }
 
   GetProductSubcategory(): Observable<ProductSubcategory[]> {
-    return this.http.get<ProductSubcategory[]>('http://localhost:51684/api/dashboard/product-subcategory');
+    if (this.productSubcategoryGrp === undefined) {
+      this.productSubcategoryGrp = this.http.get<ProductSubcategory[]>('http://localhost:51684/api/dashboard/product-subcategory').publishReplay(1).refCount();
+      return this.productSubcategoryGrp;
+    }
+    else
+      return this.productSubcategoryGrp;
   }
 
   GetNonAdminUsers(): Observable<User[]> {

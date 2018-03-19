@@ -14,17 +14,17 @@
           <a class="nav-link" [class.active]="clicked === l" (click)="clicked = l">{{l}}</a>
         </li>
       </ul>
-      <div class="assign-to" *ngIf="clicked === anchorList[1]">
+      <div class="assign-to" *ngIf="clicked === anchorList[1] && userRole === 'Admin' ">
         <button class="btn btn-info" pButton (click)="op.toggle($event)">Assign to User</button>
       </div>
-      <div class="assign-to" *ngIf="clicked === anchorList[2]">
-        <button class="btn btn-info" pButton (click)="ApproveClickHndlr($event)">Approve</button>
-      </div>
+        <div class="assign-to" *ngIf="clicked === anchorList[2] && userRole === 'Admin' ">
+          <button class="btn btn-info" pButton (click)="ApproveClickHndlr($event)">Approve</button>
+        </div>
     </div>
     <div class="group-highlight table-responsive-sm">
       <app-taggedupc *ngIf="clicked === anchorList[0]"></app-taggedupc>
       <app-untaggedupc *ngIf="clicked === anchorList[1]"></app-untaggedupc>
-      <app-savedupc *ngIf="clicked === anchorList[2]"></app-savedupc>
+      <app-savedupc *ngIf="clicked === anchorList[2] && userRole ===  'Admin'"></app-savedupc>
     </div>
   </div>
 </div>
