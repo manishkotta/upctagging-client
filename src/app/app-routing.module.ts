@@ -4,8 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppLoginComponent } from './app-login/app-login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+import { AuthenticateGuardService } from './upc.tagging.services/authenticate-guard.service';
+
 const routes = [
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'dashboard', canActivate: [AuthenticateGuardService],component: DashboardComponent },
   { path: 'login', component: AppLoginComponent },
   { path: '', component: AppLoginComponent }
 ]
@@ -13,7 +15,7 @@ const routes = [
 
 @NgModule({
 
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]
 
 })

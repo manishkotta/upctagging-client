@@ -8,13 +8,6 @@ export class FileuploadService {
   constructor(private http: HttpClient) { }
 
   UploadFileToServer(formData: FormData) {
-    return this.http.post("http://localhost:51684/api/upload-document", formData)
-      .subscribe(
-      res => {
-        console.log(res);
-      },
-      err => {
-        console.log(err);
-      });
+    return this.http.post("http://localhost:51684/api/upload-document", formData);
   }
 }

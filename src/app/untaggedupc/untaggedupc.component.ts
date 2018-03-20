@@ -52,14 +52,14 @@ export class UntaggedupcComponent implements OnInit, OnDestroy {
     this.userRoles = this._cookieService.get('userRole');
 
     this.untaggedUPCColumns = [
-      { field: 'descriptionID', header: 'Desc ID' },
-      { field: 'upcCode', header: 'UPC' },
-      { field: 'description', header: 'Description' },
-      { field: 'productType', header: 'Type' },
-      { field: 'productCategory', header: 'Category' },
-      { field: 'productSubCategory', header: 'Sub Category' },
-      { field: 'productSizing', header: 'Sizing' },
-      { field: 'itemAssignedTo', header: 'Assigned To' }
+      { field: 'descriptionID', header: 'Desc ID',style:'width:2.25em' },
+      { field: 'upcCode', header: 'UPC',style:'' },
+      { field: 'description', header: 'Description', style: '' },
+      { field: 'productType', header: 'Type', style: '' },
+      { field: 'productCategory', header: 'Category', style: '' },
+      { field: 'productSubCategory', header: 'Sub Category', style: '' },
+      { field: 'productSizing', header: 'Sizing', style: '' },
+      { field: 'itemAssignedTo', header: 'Assigned To', style: '' }
     ];
 
     this.UntaggedUPCGroup = [];
@@ -105,8 +105,6 @@ export class UntaggedupcComponent implements OnInit, OnDestroy {
         err => {
           console.log(err);
         });
-
-
 
   }
 

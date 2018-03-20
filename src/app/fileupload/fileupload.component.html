@@ -9,7 +9,7 @@
             <button type="button" class="btn btn-primary btn-block col-sm-4" (click)="handleChooseFileBtnClick($event)">Choose File</button>
             <input type="file" id="inputFile" formControlName="uploadFile" (change)="handleFileInput($event.target.files)" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                    style="display:none">
-            <label id="file-name" class="col-sm-4 file-name">No file chosen</label>
+            <label id="file-name" class="col-sm-4 file-name">{{fileName}}</label>
           </div>
         </form>
       </div>

@@ -33,7 +33,7 @@ label{
     font-size:14px;
 }
 .container{
-  max-width:1200px;
+  max-width:1400px;
 }
 .ui-table .ui-table-tbody > tr > td {
   white-space: nowrap;
@@ -53,4 +53,11 @@ label{
 }
 .ui-autocomplete-input-token input {
   width: 13em;
+}
+.sign-out {
+  float: right;
+  margin-top: 20px;
+  color: white;
+  background: #902426;
+  font-weight: bold;
 }

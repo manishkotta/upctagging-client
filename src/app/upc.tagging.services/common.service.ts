@@ -48,4 +48,8 @@ export class CommonService {
   GetNonAdminUsers(): Observable<User[]> {
     return this.http.get <User[]>('http://localhost:51684/api/dashboard/non-admins');
   }
+
+  CheckUserIsAuthorized(): Observable<any> {
+    return this.http.get<any>('');
+  }
 }

@@ -1,5 +1,5 @@
 
-<p-table [value]="UntaggedUPCGroup" [(selection)]="UntaggedUPCSelectedGrp" [scrollable]="true" [rows]="100" scrollHeight="500px" [paginator]="true" (onLazyLoad)="loadUntaggedUPCOnScroll($event)"
+<p-table [value]="UntaggedUPCGroup" [(selection)]="UntaggedUPCSelectedGrp" [scrollable]="true" [rows]="100" scrollHeight="500px" [paginator]="true" (onLazyLoad)="loadUntaggedUPCOnScroll($event) " [responsive]="true"
          [lazy]="true" [totalRecords]="totalRecords">
   <ng-template pTemplate="header">
     <tr>
@@ -10,7 +10,7 @@
         {{col.header}}
         <p-sortIcon [field]="col.field"></p-sortIcon>
       </th>
-      <th>
+      <th style="width: 2.25em">
         Edit
       </th>
     </tr>
@@ -45,7 +45,7 @@
       <td>
         <span *ngIf="upc.itemAssignedTo !=null"> {{ upc.itemAssignedTo.name }} </span>
       </td>
-      <td>
+      <td style="width: 2.25em">
         <div (click)="onUntaggedUPCEditBtnHndlr(upc)">
           <span>
             <i class="fa fa-edit"></i>

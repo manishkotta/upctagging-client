@@ -1,15 +1,18 @@
 
 <header class="header__top hidden-xs hidden-sm">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6">
-                <a href=''>
-                    <img src="assets/logo.png" class="float-left img-fluid header_logo" />
-                </a>
-            </div>
-            <div class="col-sm-6">
-                <img src="assets/avatar.png" class="float-right img-fluid text-justify header_logo">
-            </div>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <a href='/dashboard'>
+          <img src="assets/logo.png" class="float-left img-fluid header_logo" />
+        </a>
+      </div>
+      <div class="col-sm-6">
+        <!--<a (click)="op.toggle($event)">
+    <img src="assets/avatar.png" class="float-right img-fluid text-justify header_logo">
+  </a>-->
+        <button class="btn sign-out" (click)="logoutHndlr()">{{signOutBtnText}}</button>
+      </div>
     </div>
+  </div>
 </header>

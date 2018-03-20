@@ -14,7 +14,7 @@ export class AppLoginComponent implements OnInit {
 
 
   login: Login;
-
+  passwordTxtType: string;
   submitted: boolean;
   returnUrl: string;
 
@@ -23,25 +23,39 @@ export class AppLoginComponent implements OnInit {
     private cookieService: CookieService) {
     this.submitted = false;
     this.login = new Login();
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard'; 
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
+    this.passwordTxtType = "password";
   }
 
   ngOnInit() {
 
   }
 
+
+
   onSubmit() {
     this.submitted = true;
     this._authenticationService.AuthenticateUserCreds(this.login)
       .subscribe(res => {
         if (res.ok == true) {
+          localStorage.setItem('token_valid_to', res.body.validTo);
           localStorage.setItem('auth_token', res.body.authToken);
           this.cookieService.set('userRole', res.body.roleName);
-          this.router.navigateByUrl(this.returnUrl);
+          this.router.navigateByUrl(this.returnUrl);   
       }
     }, err => {
       console.log(err);
     })
 
   }
+
+  showPasswordBtnHndlr(event: any) {
+
+    if (event.target.checked)
+      this.passwordTxtType = 'text';
+    else
+      this.passwordTxtType = 'password';
+
+  }
+
 }

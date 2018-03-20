@@ -27,8 +27,6 @@ export class UntaggedUpcService {
     console.log("UnTagged UPC");
     const headers = new HttpHeaders().set('content-type', 'application-json');
 
-    filter.UserID = 1764;
-
     return this.http.post<UntaggedUPC[]>('http://localhost:51684/api/dashboard/untagged-upc', filter);
   }
 

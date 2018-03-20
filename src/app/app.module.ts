@@ -34,6 +34,8 @@ import { TaggedUpcService } from './upc.tagging.services/tagged-upc.service';
 import { AuthenticationService } from './upc.tagging.services/authentication.service';
 import { CookieService } from 'ngx-cookie-service';
 
+
+import { AuthenticateGuardService } from './upc.tagging.services/authenticate-guard.service';
 import { UpctaggingHttpInterceptor } from './upctagging.http.interceptor';
 
 @NgModule({
@@ -67,7 +69,8 @@ import { UpctaggingHttpInterceptor } from './upctagging.http.interceptor';
   providers: [FileuploadService, UntaggedUpcService, CommonService, DataTransferService, TaggedUpcService, AuthenticationService, CookieService,{
     provide: HTTP_INTERCEPTORS,
     useClass: UpctaggingHttpInterceptor,
-      multi: true}
+    multi: true
+  }, AuthenticateGuardService
   ],
   bootstrap: [AppComponent]
 })
